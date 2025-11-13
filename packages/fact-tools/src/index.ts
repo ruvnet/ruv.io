@@ -40,7 +40,7 @@ let factTools: any
 
 try {
   // Load the native module via platform loader
-  factTools = require('./index.js')
+  factTools = require('../index')
 } catch (e) {
   // Fallback - module not built yet
   console.warn('Native fact_tools module not loaded. Build the project first.')
