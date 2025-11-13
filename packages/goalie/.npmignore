@@ -1,0 +1,13 @@
+src
+__test__
+target
+Cargo.*
+build.rs
+.eslintrc.json
+.prettierrc.json
+tsconfig.json
+jest.config.js
+.github
+examples
+*.md
+!README.md

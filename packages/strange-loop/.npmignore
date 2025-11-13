@@ -1,0 +1,10 @@
+src
+__test__
+target
+*.rs
+Cargo.*
+build.rs
+vitest.config.ts
+.eslintrc.json
+.prettierrc.json
+.gitignore

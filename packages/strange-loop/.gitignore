@@ -1,0 +1,14 @@
+node_modules
+target
+*.node
+*.d.ts
+index.js
+*.swp
+*.swo
+*.swn
+.DS_Store
+dist
+build
+*.log
+coverage
+.nyc_output

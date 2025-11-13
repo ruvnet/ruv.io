@@ -1,0 +1,14 @@
+src/
+__test__/
+*.ts
+!index.d.ts
+.eslintrc.json
+.prettierrc.json
+rustfmt.toml
+build.rs
+Cargo.toml
+Cargo.lock
+target/
+node_modules/
+.git
+.github

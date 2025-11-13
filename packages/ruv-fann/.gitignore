@@ -1,0 +1,14 @@
+node_modules/
+dist/
+target/
+*.node
+index.js
+index.d.ts
+.DS_Store
+*.swp
+*.swo
+*~
+.env
+.env.local
+coverage/
+*.log

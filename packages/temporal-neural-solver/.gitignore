@@ -1,0 +1,15 @@
+*.node
+dist
+target
+node_modules
+.DS_Store
+*.swp
+*.swo
+*~
+.idea
+.vscode
+*.iml
+coverage
+.nyc_output
+*.lock
+Cargo.lock

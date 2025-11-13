@@ -1,0 +1,17 @@
+*.node
+*.d.ts
+index.js
+node_modules
+target
+Cargo.lock
+.DS_Store
+*.swp
+*.swo
+*~
+.env
+.idea
+.vscode
+*.log
+dist
+coverage
+.nyc_output

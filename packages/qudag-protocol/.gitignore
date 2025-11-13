@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.node
+*.d.ts
+target/
+Cargo.lock
+.DS_Store

@@ -39,6 +39,45 @@ importers:
         specifier: ^5.3.3
         version: 5.9.3
 
+  packages/agentic-jujutsu:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/aimds-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.25
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.0.0
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.0.0
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.50.0
+        version: 8.57.1
+      prettier:
+        specifier: ^3.0.0
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.0
+        version: 5.0.10
+      typescript:
+        specifier: ^5.3.0
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/bit-parallel-search:
     devDependencies:
       '@napi-rs/cli':
@@ -81,6 +120,36 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/code-mesh-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/cuda-rust-wasm:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/daa-prime-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/fact-tools:
     devDependencies:
       '@napi-rs/cli':
@@ -89,6 +158,48 @@ importers:
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
+
+  packages/geometric-langlands:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/goalie:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/jest':
+        specifier: ^29.5.11
+        version: 29.5.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.19.25)
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      ts-jest:
+        specifier: ^29.1.1
+        version: 29.4.5(@babel/core@7.28.5)(jest@29.7.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
 
   packages/governance:
     devDependencies:
@@ -100,6 +211,291 @@ importers:
         version: 1.6.1(@types/node@20.19.25)
 
   packages/intrinsic-dim:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/kimi-fann-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/lean-agentic:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/micro_core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/jest':
+        specifier: ^29.5.11
+        version: 29.5.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.19.25)
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      ts-jest:
+        specifier: ^29.1.1
+        version: 29.4.5(@babel/core@7.28.5)(jest@29.7.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/midstreamer-attractor:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/midstreamer-neural-solver:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/midstreamer-quic:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/midstreamer-scheduler:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/midstreamer-strange-loop:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/midstreamer-temporal-compare:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nanosecond-scheduler:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/neurodna:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/opencv-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/qudag-crypto:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/qudag-protocol:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/jest':
+        specifier: ^29.5.11
+        version: 29.5.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.19.25)
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      ts-jest:
+        specifier: ^29.1.1
+        version: 29.4.5(@babel/core@7.28.5)(jest@29.7.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/ruv-fann:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.25
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/ruv-swarm-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/strange-loop:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/subjective-time-expansion:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/sublinear:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/temporal-attractor-studio:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/temporal-neural-solver:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/jest':
+        specifier: ^29.5.11
+        version: 29.5.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.19.25)
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      ts-jest:
+        specifier: ^29.1.1
+        version: 29.4.5(@babel/core@7.28.5)(jest@29.7.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/veritas-nexus:
     devDependencies:
       '@napi-rs/cli':
         specifier: ^2.16.0
