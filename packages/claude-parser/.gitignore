@@ -1,0 +1,16 @@
+node_modules/
+*.node
+*.so
+*.dylib
+*.exe
+target/
+dist/
+.DS_Store
+*.swp
+*.swo
+*~
+.env
+.env.local
+coverage/
+.nyc_output/
+*.tgz

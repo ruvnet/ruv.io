@@ -137,3 +137,22 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Rust/napi-rs specific
+target/
+*.node
+Cargo.lock
+artifacts/
+
+# Build system
+.pnpm-store/
+
+# E2B and orchestration
+agents.db
+orchestrator.log
+BUILD_REPORT.md
+
+# Platform-specific binaries
+*.dylib
+*.so
+*.dll

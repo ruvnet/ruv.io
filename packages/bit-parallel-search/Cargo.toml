@@ -1,0 +1,25 @@
+[package]
+name = "bit_parallel_search"
+version = "0.1.0"
+edition = "2021"
+description = "NAPI-RS bindings for bit-parallel-search Rust crate"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/ruvnet/ruv.io"
+homepage = "https://ruv.io"
+authors = ["rUv <support@ruv.io>"]
+
+[dependencies]
+napi = { version = "2.16", features = ["serde-json"] }
+napi-derive = "2.16"
+bit-parallel-search = "0.1"
+serde_json = "1"
+
+[build-dependencies]
+napi-build = "2.1"
+
+[lib]
+crate-type = ["cdylib"]
+
+[profile.release]
+lto = true
+opt-level = 3

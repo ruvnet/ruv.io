@@ -1,0 +1,24 @@
+[package]
+name = "intrinsic_dim"
+version = "0.0.0"
+edition = "2021"
+authors = ["ruv.io team"]
+license = "MIT"
+repository = "https://github.com/ruvio/ruv.io"
+description = "Fast intrinsic dimensionality estimation for ML model optimization with napi-rs bindings"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = "2.16"
+napi-derive = "2.16"
+intrinsic-dim = "0.0.0"
+
+[build-dependencies]
+napi-build = "2.1"
+
+[profile.release]
+lto = true
+opt-level = 3
+strip = true

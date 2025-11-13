@@ -1,0 +1,69 @@
+{
+  "name": "@ruv.io/bit-parallel-search",
+  "version": "0.1.0",
+  "description": "Blazing fast string search using bit-parallel algorithms - NAPI bindings",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.node",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "prepublishOnly": "napi prepublish -t npm",
+    "version": "napi version",
+    "clean": "rimraf dist *.node *.d.ts",
+    "lint": "eslint src --ext .ts,.rs",
+    "format": "prettier --write 'src/**/*.ts' && cargo fmt"
+  },
+  "napi": {
+    "name": "bit_parallel_search",
+    "triples": {
+      "additional": [
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-apple-darwin",
+        "x86_64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "aarch64-pc-windows-msvc"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "@types/jest": "^29.5.11",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
+    "eslint": "^8.56.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "bit-parallel-search",
+    "string-search",
+    "rust",
+    "napi",
+    "performance",
+    "native"
+  ],
+  "author": "rUv <support@ruv.io>",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvnet/ruv.io.git",
+    "directory": "packages/bit-parallel-search"
+  },
+  "homepage": "https://github.com/ruvnet/ruv.io/tree/main/packages/bit-parallel-search"
+}

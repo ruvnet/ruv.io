@@ -1,0 +1,44 @@
+{
+  "name": "@ruv.io/monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Monorepo for @ruv.io Rust-to-NPM packages",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "pnpm -r --filter './packages/*' build",
+    "build:parallel": "pnpm -r --filter './packages/*' --parallel build",
+    "test": "pnpm -r --filter './packages/*' test",
+    "test:parallel": "pnpm -r --filter './packages/*' --parallel test",
+    "lint": "pnpm -r --filter './packages/*' lint",
+    "clean": "pnpm -r --filter './packages/*' clean",
+    "orchestrate": "tsx scripts/orchestrate.ts",
+    "orchestrate:pilot": "tsx scripts/orchestrate.ts --pilot",
+    "analyze:deps": "tsx scripts/analyze-dependencies.ts",
+    "bootstrap": "pnpm install && pnpm -r --filter './packages/*' build"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.3",
+    "tsx": "^4.7.0",
+    "prettier": "^3.1.1",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
+    "jest": "^29.7.0",
+    "@types/jest": "^29.5.11"
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@8.14.0",
+  "author": "rUv <support@ruv.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvnet/ruv.io.git"
+  }
+}
