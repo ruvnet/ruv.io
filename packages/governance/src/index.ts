@@ -37,6 +37,9 @@ export interface Results {
   status: string;
 }
 
+// Import and re-export native bindings with types
+const nativeBindings = require('../index');
+
 /**
  * Create a new proposal
  * @param id - Unique proposal identifier
@@ -44,11 +47,7 @@ export interface Results {
  * @param description - Proposal description
  * @returns Proposal object
  */
-export function createProposal(
-  id: string,
-  title: string,
-  description: string
-): Proposal;
+export const createProposal: (id: string, title: string, description: string) => Proposal = nativeBindings.createProposal;
 
 /**
  * Record a vote on a proposal
@@ -58,11 +57,7 @@ export function createProposal(
  * @returns true if vote was recorded successfully
  * @throws Error if vote type is invalid or proposal doesn't exist
  */
-export function vote(
-  proposal_id: string,
-  voter_id: string,
-  vote_type: 'for' | 'against' | 'abstain'
-): boolean;
+export const vote: (proposal_id: string, voter_id: string, vote_type: 'for' | 'against' | 'abstain') => boolean = nativeBindings.vote;
 
 /**
  * Get voting results for a proposal
@@ -70,7 +65,7 @@ export function vote(
  * @returns Results object with vote counts and status
  * @throws Error if proposal not found
  */
-export function getResults(proposal_id: string): Results;
+export const getResults: (proposal_id: string) => Results = nativeBindings.getResults;
 
 /**
  * Close a proposal and finalize voting
@@ -78,13 +73,10 @@ export function getResults(proposal_id: string): Results;
  * @returns true if proposal was closed successfully
  * @throws Error if proposal not found
  */
-export function closeProposal(proposal_id: string): boolean;
+export const closeProposal: (proposal_id: string) => boolean = nativeBindings.closeProposal;
 
 /**
  * Get all proposals
  * @returns Array of all proposals
  */
-export function getAllProposals(): Proposal[];
-
-// Re-export native bindings
-export * from './index.node';
+export const getAllProposals: () => Proposal[] = nativeBindings.getAllProposals;

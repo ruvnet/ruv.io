@@ -60,6 +60,9 @@ export interface EstimationParams {
   maxFeatures: number;
 }
 
+// Import and re-export native bindings with types
+const nativeBindings = require('../index');
+
 /**
  * Estimate intrinsic dimensionality from data
  *
@@ -71,7 +74,7 @@ export interface EstimationParams {
  * const result = estimate([[1, 2, 3], [4, 5, 6], [7, 8, 9]]);
  * console.log(result.dimension); // Estimated dimension
  */
-export function estimate(data: number[][]): DimensionalityResult;
+export const estimate: (data: number[][]) => DimensionalityResult = nativeBindings.estimate;
 
 /**
  * Estimate dimensionality using MKKF method
@@ -85,7 +88,7 @@ export function estimate(data: number[][]): DimensionalityResult;
  * const dimension = estimateMkkf([[1, 2], [3, 4], [5, 6]], 2);
  * console.log(dimension); // Estimated dimension
  */
-export function estimateMkkf(data: number[][], kMax: number): number;
+export const estimateMkkf: (data: number[][], kMax: number) => number = nativeBindings.estimateMkkf;
 
 /**
  * Estimate dimensionality for batch data
@@ -100,7 +103,7 @@ export function estimateMkkf(data: number[][], kMax: number): number;
  *   [[5, 6], [7, 8]]
  * ]);
  */
-export function estimateBatch(dataBatch: number[][][]): DimensionalityResult[];
+export const estimateBatch: (dataBatch: number[][][]) => DimensionalityResult[] = nativeBindings.estimateBatch;
 
 /**
  * Get default estimation parameters
@@ -111,7 +114,4 @@ export function estimateBatch(dataBatch: number[][][]): DimensionalityResult[];
  * const params = getDefaultParams();
  * console.log(params.varianceThreshold); // 0.95
  */
-export function getDefaultParams(): EstimationParams;
-
-// Re-export native bindings
-export * from './index.node';
+export const getDefaultParams: () => EstimationParams = nativeBindings.getDefaultParams;

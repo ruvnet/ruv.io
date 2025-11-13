@@ -1,4 +1,6 @@
-// TypeScript type definitions and exports for claude-parser
+// TypeScript wrapper for claude-parser native bindings
+
+const { parse: nativeParse, parseStream: nativeParseStream, isValidJson: nativeIsValidJson, getJsonType: nativeGetJsonType } = require('../index');
 
 interface ParsedJSON {
   [key: string]: any;
@@ -10,7 +12,9 @@ interface ParsedJSON {
  * @returns The parsed JSON object
  * @throws Error if the JSON is invalid
  */
-export function parse(jsonString: string): ParsedJSON | any;
+export function parse(jsonString: string): ParsedJSON | any {
+  return nativeParse(jsonString);
+}
 
 /**
  * Parse a newline-delimited JSON stream
@@ -18,14 +22,18 @@ export function parse(jsonString: string): ParsedJSON | any;
  * @returns An array of parsed JSON objects
  * @throws Error if any line contains invalid JSON
  */
-export function parseStream(jsonStream: string): Array<ParsedJSON | any>;
+export function parseStream(jsonStream: string): Array<ParsedJSON | any> {
+  return nativeParseStream(jsonStream);
+}
 
 /**
  * Validate if a string is valid JSON
  * @param jsonString - The JSON string to validate
  * @returns true if the string is valid JSON, false otherwise
  */
-export function isValidJson(jsonString: string): boolean;
+export function isValidJson(jsonString: string): boolean {
+  return nativeIsValidJson(jsonString);
+}
 
 /**
  * Get the type of a JSON value
@@ -33,7 +41,6 @@ export function isValidJson(jsonString: string): boolean;
  * @returns The type as a string: 'null', 'boolean', 'number', 'string', 'array', or 'object'
  * @throws Error if the JSON is invalid
  */
-export function getJsonType(jsonString: string): string;
-
-// Re-export native bindings
-export * from './index.node';
+export function getJsonType(jsonString: string): string {
+  return nativeGetJsonType(jsonString);
+}

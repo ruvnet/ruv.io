@@ -39,8 +39,8 @@ export interface OptimizationResult {
 let factTools: any
 
 try {
-  // Try to load the native module
-  factTools = require('./fact_tools.node')
+  // Load the native module via platform loader
+  factTools = require('./index.js')
 } catch (e) {
   // Fallback - module not built yet
   console.warn('Native fact_tools module not loaded. Build the project first.')
@@ -58,7 +58,7 @@ export function processContext(context: Context): ProcessedContext {
   }
 
   const contextJson = JSON.stringify(context)
-  const result = factTools.process_context(contextJson)
+  const result = factTools.processContext(contextJson)
 
   return JSON.parse(result)
 }
@@ -79,7 +79,7 @@ export function optimizeContext(
 
   const contextJson = JSON.stringify(context)
   const optionsJson = JSON.stringify(options || {})
-  const result = factTools.optimize_context(contextJson, optionsJson)
+  const result = factTools.optimizeContext(contextJson, optionsJson)
 
   return JSON.parse(result)
 }
@@ -95,7 +95,7 @@ export function batchProcessContexts(contexts: Context[]): ProcessedContext[] {
   }
 
   const contextsJson = JSON.stringify(contexts)
-  const result = factTools.batch_process_contexts(contextsJson)
+  const result = factTools.batchProcessContexts(contextsJson)
 
   return JSON.parse(result)
 }
@@ -112,7 +112,7 @@ export function extractKeyPhrases(context: Context, maxPhrases: number = 10): st
   }
 
   const contextJson = JSON.stringify(context)
-  const result = factTools.extract_key_phrases(contextJson, maxPhrases)
+  const result = factTools.extractKeyPhrases(contextJson, maxPhrases)
 
   return JSON.parse(result)
 }
@@ -131,7 +131,7 @@ export function calculateSimilarity(context1: Context, context2: Context): numbe
   const context1Json = JSON.stringify(context1)
   const context2Json = JSON.stringify(context2)
 
-  return factTools.calculate_similarity(context1Json, context2Json)
+  return factTools.calculateSimilarity(context1Json, context2Json)
 }
 
 /**
