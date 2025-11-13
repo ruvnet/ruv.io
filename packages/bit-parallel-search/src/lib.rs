@@ -10,6 +10,9 @@ pub struct BitParallelSearch {
 impl BitParallelSearch {
   #[napi(constructor)]
   pub fn new(pattern: String) -> napi::Result<Self> {
+    if pattern.is_empty() {
+      return Err(napi::Error::from_reason("Pattern cannot be empty"));
+    }
     let searcher = BitParallelSearcher::new(pattern.as_bytes());
     Ok(BitParallelSearch { searcher })
   }
@@ -56,6 +59,10 @@ impl BitParallelSearch {
 /// Utility function: Simple search without creating a searcher instance
 #[napi]
 pub fn search(haystack: String, needle: String) -> Vec<u32> {
+  if needle.is_empty() {
+    return Vec::new();
+  }
+
   let searcher = BitParallelSearcher::new(needle.as_bytes());
   let haystack_bytes = haystack.as_bytes();
   let mut positions = Vec::new();
