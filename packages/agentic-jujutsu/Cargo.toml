@@ -1,0 +1,21 @@
+[package]
+name = "agentic_jujutsu"
+version = "1.0.1"
+edition = "2021"
+authors = ["ruv.io team"]
+license = "MIT"
+repository = "https://github.com/ruvio/ruv.io"
+description = "AI-powered Jujutsu VCS wrapper for multi-agent collaboration - 10-100x faster than Git with MCP protocol support"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "2.16", features = ["tokio_rt"] }
+napi-derive = "2.16"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+tokio = { version = "1", features = ["time"] }
+
+[build-dependencies]
+napi-build = "2.1"

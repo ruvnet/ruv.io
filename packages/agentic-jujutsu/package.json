@@ -1,0 +1,50 @@
+{
+  "name": "@ruv.io/agentic-jujutsu",
+  "version": "1.0.1",
+  "description": "AI-powered Jujutsu VCS wrapper for multi-agent collaboration - 10-100x faster than Git with MCP protocol support",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "agentic_jujutsu",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
+      ]
+    }
+  },
+  "keywords": [
+    "agentic-jujutsu",
+    "jujutsu",
+    "vcs",
+    "version-control",
+    "ai",
+    "collaboration",
+    "mcp",
+    "napi",
+    "rust",
+    "high-performance"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 14"
+  }
+}

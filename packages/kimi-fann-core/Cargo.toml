@@ -1,0 +1,20 @@
+[package]
+name = "kimi_fann_core"
+version = "0.1.4"
+edition = "2021"
+authors = ["ruv.io team"]
+license = "MIT"
+repository = "https://github.com/ruvio/ruv.io"
+description = "Optimized micro-expert neural architecture for Kimi-K2 WASM conversion with 5-10x performance improvements"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "2.16", features = ["serde-json"] }
+napi-derive = "2.16"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+
+[build-dependencies]
+napi-build = "2.1"

@@ -1,0 +1,48 @@
+{
+  "name": "@ruv.io/ruv-swarm-core",
+  "version": "1.0.6",
+  "description": "Core orchestration and agent traits for RUV Swarm with napi-rs bindings",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "ruv_swarm_core",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
+      ]
+    }
+  },
+  "keywords": [
+    "ruv-swarm-core",
+    "swarm",
+    "orchestration",
+    "agent",
+    "distributed",
+    "napi",
+    "rust",
+    "high-performance"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 14"
+  }
+}

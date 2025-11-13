@@ -1,0 +1,25 @@
+[package]
+name = "qudag_crypto"
+version = "0.5.1"
+edition = "2021"
+authors = ["ruv.io team"]
+license = "MIT"
+repository = "https://github.com/ruvio/ruv.io"
+description = "Quantum-resistant cryptography library for QuDAG - includes ML-KEM-768, ML-DSA, HQC, and BLAKE3"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = { version = "2.16", features = ["serde-json"] }
+napi-derive = "2.16"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+sha2 = "0.10"
+blake3 = "1.5"
+hmac = "0.12"
+rand = "0.8"
+hex = "0.4"
+
+[build-dependencies]
+napi-build = "2.1"

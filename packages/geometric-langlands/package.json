@@ -1,0 +1,48 @@
+{
+  "name": "@ruv.io/geometric-langlands",
+  "version": "0.2.2",
+  "description": "Geometric Langlands - A comprehensive computational framework for the Geometric Langlands Conjecture with napi-rs bindings",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "geometric_langlands",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
+      ]
+    }
+  },
+  "keywords": [
+    "geometric-langlands",
+    "langlands",
+    "mathematical",
+    "computation",
+    "automorphic",
+    "hecke",
+    "napi",
+    "rust"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 14"
+  }
+}

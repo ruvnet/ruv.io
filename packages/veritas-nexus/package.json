@@ -1,0 +1,47 @@
+{
+  "name": "@ruv.io/veritas-nexus",
+  "version": "0.1.0",
+  "description": "Advanced multi-modal lie detection system with explainable AI, featuring text, vision, audio, and physiological analysis with ReAct reasoning",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "veritas_nexus",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
+      ]
+    }
+  },
+  "keywords": [
+    "veritas-nexus",
+    "lie-detection",
+    "ai",
+    "ml",
+    "analysis",
+    "napi",
+    "rust"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 14"
+  }
+}

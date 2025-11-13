@@ -1,0 +1,65 @@
+{
+  "name": "@ruv.io/daa-prime-core",
+  "version": "0.2.1",
+  "description": "Core shared structures and protocol definitions for Prime distributed ML framework",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "daa_prime_core",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-apple-darwin",
+        "x86_64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "aarch64-pc-windows-msvc"
+      ]
+    }
+  },
+  "keywords": [
+    "daa",
+    "prime",
+    "core",
+    "ml",
+    "distributed",
+    "napi",
+    "rust",
+    "native",
+    "high-performance"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "vitest": "^1.0.0",
+    "typescript": "^5.3.3"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvnet/ruv.io.git",
+    "directory": "packages/daa-prime-core"
+  },
+  "homepage": "https://github.com/ruvnet/ruv.io/tree/main/packages/daa-prime-core"
+}
