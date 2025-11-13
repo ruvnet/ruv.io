@@ -1,4 +1,3 @@
-use napi::{bindgen_prelude::*, JsObject, JsString, JsUnknown};
 use napi_derive::napi;
 use bit_parallel_search::BitParallelSearcher;
 
@@ -11,104 +10,68 @@ pub struct BitParallelSearch {
 impl BitParallelSearch {
   #[napi(constructor)]
   pub fn new(pattern: String) -> napi::Result<Self> {
-    match BitParallelSearcher::new(pattern.clone()) {
-      Ok(searcher) => {
-        Ok(BitParallelSearch { searcher })
-      }
-      Err(_) => {
-        Err(napi::Error::new(
-          napi::Status::InvalidArg,
-          format!("Failed to create searcher with pattern: {}", pattern),
-        ))
-      }
-    }
+    let searcher = BitParallelSearcher::new(pattern.as_bytes());
+    Ok(BitParallelSearch { searcher })
   }
 
   /// Search for all occurrences of the pattern in the haystack
   #[napi]
-  pub fn search_all(&self, haystack: String) -> napi::Result<Vec<u32>> {
-    match self.searcher.search_all(&haystack) {
-      Ok(positions) => {
-        Ok(positions.iter().map(|&p| p as u32).collect())
-      }
-      Err(_) => {
-        Err(napi::Error::new(
-          napi::Status::GenericFailure,
-          "Failed to search in haystack",
-        ))
+  pub fn search_all(&self, haystack: String) -> Vec<u32> {
+    let haystack_bytes = haystack.as_bytes();
+    let mut positions = Vec::new();
+    let mut offset = 0;
+
+    while offset < haystack_bytes.len() {
+      if let Some(pos) = self.searcher.find_in(&haystack_bytes[offset..]) {
+        let abs_pos = offset + pos;
+        positions.push(abs_pos as u32);
+        offset = abs_pos + 1;
+      } else {
+        break;
       }
     }
+
+    positions
   }
 
   /// Find the first occurrence of the pattern in the haystack
   #[napi]
-  pub fn search_first(&self, haystack: String) -> napi::Result<Option<u32>> {
-    match self.searcher.search_first(&haystack) {
-      Ok(position) => {
-        Ok(position.map(|p| p as u32))
-      }
-      Err(_) => {
-        Err(napi::Error::new(
-          napi::Status::GenericFailure,
-          "Failed to search first occurrence",
-        ))
-      }
-    }
+  pub fn search_first(&self, haystack: String) -> Option<u32> {
+    self.searcher.find_in(haystack.as_bytes()).map(|p| p as u32)
   }
 
   /// Count occurrences of the pattern in the haystack
   #[napi]
-  pub fn count(&self, haystack: String) -> napi::Result<u32> {
-    match self.searcher.count(&haystack) {
-      Ok(count) => Ok(count as u32),
-      Err(_) => {
-        Err(napi::Error::new(
-          napi::Status::GenericFailure,
-          "Failed to count occurrences",
-        ))
-      }
-    }
+  pub fn count(&self, haystack: String) -> u32 {
+    self.search_all(haystack).len() as u32
   }
 
   /// Check if pattern exists in haystack
   #[napi]
-  pub fn contains(&self, haystack: String) -> napi::Result<bool> {
-    match self.searcher.contains(&haystack) {
-      Ok(found) => Ok(found),
-      Err(_) => {
-        Err(napi::Error::new(
-          napi::Status::GenericFailure,
-          "Failed to check if pattern exists",
-        ))
-      }
-    }
+  pub fn contains(&self, haystack: String) -> bool {
+    self.searcher.find_in(haystack.as_bytes()).is_some()
   }
 }
 
 /// Utility function: Simple search without creating a searcher instance
 #[napi]
-pub fn search(haystack: String, needle: String) -> napi::Result<Vec<u32>> {
-  match BitParallelSearcher::new(needle) {
-    Ok(searcher) => {
-      match searcher.search_all(&haystack) {
-        Ok(positions) => {
-          Ok(positions.iter().map(|&p| p as u32).collect())
-        }
-        Err(_) => {
-          Err(napi::Error::new(
-            napi::Status::GenericFailure,
-            "Failed to search",
-          ))
-        }
-      }
-    }
-    Err(_) => {
-      Err(napi::Error::new(
-        napi::Status::InvalidArg,
-        "Invalid needle pattern",
-      ))
+pub fn search(haystack: String, needle: String) -> Vec<u32> {
+  let searcher = BitParallelSearcher::new(needle.as_bytes());
+  let haystack_bytes = haystack.as_bytes();
+  let mut positions = Vec::new();
+  let mut offset = 0;
+
+  while offset < haystack_bytes.len() {
+    if let Some(pos) = searcher.find_in(&haystack_bytes[offset..]) {
+      let abs_pos = offset + pos;
+      positions.push(abs_pos as u32);
+      offset = abs_pos + 1;
+    } else {
+      break;
     }
   }
+
+  positions
 }
 
 /// Utility function: Get search results with metadata
@@ -121,35 +84,14 @@ pub struct SearchResult {
 
 /// Search with detailed result object
 #[napi]
-pub fn search_detailed(haystack: String, needle: String) -> napi::Result<SearchResult> {
-  match BitParallelSearcher::new(needle) {
-    Ok(searcher) => {
-      match (
-        searcher.search_all(&haystack),
-        searcher.count(&haystack),
-      ) {
-        (Ok(positions), Ok(count)) => {
-          let positions_u32: Vec<u32> = positions.iter().map(|&p| p as u32).collect();
-          let found = !positions_u32.is_empty();
-          Ok(SearchResult {
-            positions: positions_u32,
-            count: count as u32,
-            found,
-          })
-        }
-        _ => {
-          Err(napi::Error::new(
-            napi::Status::GenericFailure,
-            "Failed to perform search",
-          ))
-        }
-      }
-    }
-    Err(_) => {
-      Err(napi::Error::new(
-        napi::Status::InvalidArg,
-        "Invalid needle pattern",
-      ))
-    }
+pub fn search_detailed(haystack: String, needle: String) -> SearchResult {
+  let positions = search(haystack, needle);
+  let count = positions.len() as u32;
+  let found = !positions.is_empty();
+
+  SearchResult {
+    positions,
+    count,
+    found,
   }
 }

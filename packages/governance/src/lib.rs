@@ -1,6 +1,7 @@
-use napi::{bindgen_prelude::*, JsObject, JsString};
 use napi_derive::napi;
+use napi::bindgen_prelude::*;
 use serde::{Deserialize, Serialize};
+use serde_json::Value as JsonValue;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
@@ -136,23 +137,15 @@ thread_local! {
 }
 
 /// Create a new proposal
-/// @param id - Unique proposal identifier
-/// @param title - Proposal title
-/// @param description - Proposal description
-/// @returns Proposal object
-#[napi]
-pub fn create_proposal(id: String, title: String, description: String) -> JsObject {
+#[napi(ts_return_type = "any")]
+pub fn create_proposal(id: String, title: String, description: String) -> JsonValue {
   GOVERNANCE_INSTANCE.with(|gov| {
     let proposal = gov.create_proposal(id, title, description);
-    proposal_to_js_object(&proposal)
+    serde_json::to_value(&proposal).unwrap()
   })
 }
 
 /// Record a vote on a proposal
-/// @param proposal_id - ID of the proposal to vote on
-/// @param voter_id - ID of the voter
-/// @param vote_type - Type of vote: 'for', 'against', or 'abstain'
-/// @returns true if vote was recorded successfully
 #[napi]
 pub fn vote(proposal_id: String, voter_id: String, vote_type: String) -> Result<bool> {
   GOVERNANCE_INSTANCE.with(|gov| {
@@ -162,19 +155,15 @@ pub fn vote(proposal_id: String, voter_id: String, vote_type: String) -> Result<
 }
 
 /// Get voting results for a proposal
-/// @param proposal_id - ID of the proposal
-/// @returns Results object with vote counts and status
-#[napi]
-pub fn get_results(proposal_id: String) -> Result<JsObject> {
+#[napi(ts_return_type = "any")]
+pub fn get_results(proposal_id: String) -> Result<JsonValue> {
   GOVERNANCE_INSTANCE.with(|gov| {
     let results = gov.get_results(proposal_id)?;
-    Ok(results_to_js_object(&results))
+    Ok(serde_json::to_value(&results).unwrap())
   })
 }
 
 /// Close a proposal and finalize voting
-/// @param proposal_id - ID of the proposal to close
-/// @returns true if proposal was closed successfully
 #[napi]
 pub fn close_proposal(proposal_id: String) -> Result<bool> {
   GOVERNANCE_INSTANCE.with(|gov| {
@@ -190,34 +179,13 @@ pub fn close_proposal(proposal_id: String) -> Result<bool> {
 }
 
 /// Get all proposals
-/// @returns Array of all proposals
-#[napi]
-pub fn get_all_proposals() -> Vec<JsObject> {
+#[napi(ts_return_type = "any[]")]
+pub fn get_all_proposals() -> Vec<JsonValue> {
   GOVERNANCE_INSTANCE.with(|gov| {
     let proposals = gov.proposals.lock().unwrap();
     proposals
       .values()
-      .map(proposal_to_js_object)
+      .map(|p| serde_json::to_value(p).unwrap())
       .collect()
   })
-}
-
-/// Helper function to convert Proposal to JS object
-fn proposal_to_js_object(proposal: &Proposal) -> JsObject {
-  let mut obj = JsObject::new();
-
-  // These would be set via the NAPI environment in a real implementation
-  // For now, we return a basic structure that demonstrates the concept
-
-  obj
-}
-
-/// Helper function to convert Results to JS object
-fn results_to_js_object(results: &Results) -> JsObject {
-  let mut obj = JsObject::new();
-
-  // These would be set via the NAPI environment in a real implementation
-  // For now, we return a basic structure that demonstrates the concept
-
-  obj
 }

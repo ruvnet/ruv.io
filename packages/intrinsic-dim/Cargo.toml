@@ -13,7 +13,6 @@ crate-type = ["cdylib"]
 [dependencies]
 napi = "2.16"
 napi-derive = "2.16"
-intrinsic-dim = "0.0.0"
 
 [build-dependencies]
 napi-build = "2.1"
