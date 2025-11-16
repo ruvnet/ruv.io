@@ -48,6 +48,40 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/aimds-analysis:
+    dependencies:
+      '@ruv.io/aimds-core':
+        specifier: workspace:*
+        version: link:../aimds-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.25
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.0.0
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.0.0
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.50.0
+        version: 8.57.1
+      prettier:
+        specifier: ^3.0.0
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.0
+        version: 5.0.10
+      typescript:
+        specifier: ^5.3.0
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/aimds-core:
     devDependencies:
       '@napi-rs/cli':
@@ -74,6 +108,52 @@ importers:
       typescript:
         specifier: ^5.3.0
         version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/aimds-detection:
+    dependencies:
+      '@ruv.io/aimds-core':
+        specifier: workspace:*
+        version: link:../aimds-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/jest':
+        specifier: ^29.5.11
+        version: 29.5.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.19.25)
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      ts-jest:
+        specifier: ^29.1.1
+        version: 29.4.5(@babel/core@7.28.5)(jest@29.7.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/aimds-response:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
       vitest:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
@@ -120,6 +200,15 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/code-mesh-cli:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/code-mesh-core:
     devDependencies:
       '@napi-rs/cli':
@@ -129,7 +218,54 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/code-mesh-tui:
+    dependencies:
+      '@ruv.io/code-mesh-core':
+        specifier: workspace:*
+        version: link:../code-mesh-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/code-mesh-wasm:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/cuda-rust-wasm:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/daa-prime-cli:
+    dependencies:
+      '@ruv.io/daa-prime-core':
+        specifier: workspace:*
+        version: link:../daa-prime-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/daa-prime-coordinator:
     devDependencies:
       '@napi-rs/cli':
         specifier: ^2.16.0
@@ -150,6 +286,35 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/daa-prime-dht:
+    dependencies:
+      '@ruv.io/daa-prime-core':
+        specifier: ^0.2.1
+        version: link:../daa-prime-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/daa-prime-trainer:
+    dependencies:
+      '@ruv.io/daa-prime-core':
+        specifier: ^0.2.1
+        version: link:../daa-prime-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/fact-tools:
     devDependencies:
       '@napi-rs/cli':
@@ -160,6 +325,19 @@ importers:
         version: 1.6.1(@types/node@20.19.25)
 
   packages/geometric-langlands:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/geometric-langlands-cli:
+    dependencies:
+      '@ruv.io/geometric-langlands':
+        specifier: ^0.2.2
+        version: link:../geometric-langlands
     devDependencies:
       '@napi-rs/cli':
         specifier: ^2.16.0
@@ -237,6 +415,15 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/micro_cartan_attn:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/micro_core:
     devDependencies:
       '@napi-rs/cli':
@@ -269,6 +456,48 @@ importers:
       typescript:
         specifier: ^5.3.3
         version: 5.9.3
+
+  packages/micro_metrics:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/jest':
+        specifier: ^29.5.11
+        version: 29.5.14
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      jest:
+        specifier: ^29.7.0
+        version: 29.7.0(@types/node@20.19.25)
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      ts-jest:
+        specifier: ^29.1.1
+        version: 29.4.5(@babel/core@7.28.5)(jest@29.7.0)(typescript@5.9.3)
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+
+  packages/micro_routing:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
 
   packages/midstreamer-attractor:
     devDependencies:
@@ -342,7 +571,122 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/nt-agentdb-client:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-backtesting:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/nt-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-execution:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-features:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-market-data:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-memory:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-neural:
+    dependencies:
+      '@ruv.io/nt-core':
+        specifier: ^1.0.0
+        version: link:../nt-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-portfolio:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-streaming:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.18.0
+        version: 2.18.4
+      '@types/node':
+        specifier: ^20.10.0
+        version: 20.19.25
+      '@typescript-eslint/eslint-plugin':
+        specifier: ^6.18.1
+        version: 6.21.0(@typescript-eslint/parser@6.21.0)(eslint@8.57.1)(typescript@5.9.3)
+      '@typescript-eslint/parser':
+        specifier: ^6.18.1
+        version: 6.21.0(eslint@8.57.1)(typescript@5.9.3)
+      eslint:
+        specifier: ^8.56.0
+        version: 8.57.1
+      prettier:
+        specifier: ^3.1.1
+        version: 3.6.2
+      rimraf:
+        specifier: ^5.0.5
+        version: 5.0.10
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/nt-utils:
     devDependencies:
       '@napi-rs/cli':
         specifier: ^2.16.0
@@ -417,7 +761,42 @@ importers:
         specifier: ^1.0.0
         version: 1.6.1(@types/node@20.19.25)
 
+  packages/ruv-swarm-agents:
+    dependencies:
+      '@ruv.io/ruv-swarm-core':
+        specifier: '*'
+        version: link:../ruv-swarm-core
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/ruv-swarm-cli:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
   packages/ruv-swarm-core:
+    devDependencies:
+      '@napi-rs/cli':
+        specifier: ^2.16.0
+        version: 2.18.4
+      vitest:
+        specifier: ^1.0.0
+        version: 1.6.1(@types/node@20.19.25)
+
+  packages/ruv-swarm-transport:
+    dependencies:
+      '@ruv.io/ruv-swarm-core':
+        specifier: 1.0.6
+        version: link:../ruv-swarm-core
     devDependencies:
       '@napi-rs/cli':
         specifier: ^2.16.0

@@ -1,656 +1,293 @@
-# 📦 @ruv.io/daa-prime-cli
+# @ruv.io/daa-prime-cli
 
-> Command-line interface for Prime distributed ML operations
+CLI interface for DAA Prime (Decentralized Autonomous Agents) with command parsing, REPL mode, and configuration management. Built with napi-rs for high-performance native bindings.
 
-[![npm version](https://img.shields.io/npm/v/@ruv.io/daa-prime-cli.svg?style=flat-square)](https://www.npmjs.com/package/@ruv.io/daa-prime-cli)
-[![npm downloads](https://img.shields.io/npm/dm/@ruv.io/daa-prime-cli.svg?style=flat-square)](https://www.npmjs.com/package/@ruv.io/daa-prime-cli)
-[![license](https://img.shields.io/npm/l/@ruv.io/daa-prime-cli.svg?style=flat-square)](https://github.com/ruvnet/ruv.io/blob/main/LICENSE)
-[![build status](https://img.shields.io/github/actions/workflow/status/ruvnet/ruv.io/ci.yml?style=flat-square)](https://github.com/ruvnet/ruv.io/actions)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg?style=flat-square)](https://www.typescriptlang.org/)
-[![Rust](https://img.shields.io/badge/Rust-Native-orange.svg?style=flat-square)](https://www.rust-lang.org/)
+## Features
 
----
+- **Command Parser**: Parse complex command lines with arguments and options
+- **REPL Mode**: Interactive Read-Eval-Print-Loop for command execution
+- **Command History**: Maintain and manage command execution history
+- **Configuration Management**: Flexible configuration with validation
+- **Session Management**: Track REPL sessions with unique identifiers
+- **Error Handling**: Comprehensive error handling and reporting
 
-## 📚 Table of Contents
-
-- [Overview](#-overview)
-- [Features](#-features)
-- [Installation](#-installation)
-- [Quick Start](#-quick-start)
-- [Usage Guide](#-usage-guide)
-- [API Reference](#-api-reference)
-- [Examples](#-examples)
-- [Performance](#-performance)
-- [Platform Support](#-platform-support)
-- [Contributing](#-contributing)
-- [License](#-license)
-
----
-
-## 🎯 Overview
-
-`@ruv.io/daa-prime-cli` is a high-performance Node.js native addon that provides TypeScript bindings for the [`daa-prime-cli`](https://crates.io/crates/daa-prime-cli) Rust crate. Built with [napi-rs](https://napi.rs/), it delivers native performance with a modern JavaScript API.
-
-**Key Information:**
-- **Version**: 0.2.1
-- **Downloads**: 886+
-- **Categories**: Cli Tools
-- **License**: MIT
-- **Rust Crate**: [daa-prime-cli](https://crates.io/crates/daa-prime-cli)
-
----
-
-## ✨ Features
-
-- 🚀 **High Performance**: Native Rust implementation with zero-copy operations
-- 📦 **Easy to Use**: Simple, intuitive TypeScript API
-- 🔒 **Type Safe**: Full TypeScript definitions included
-- ⚡ **Async Ready**: Built on modern async/await patterns
-- 🌐 **Cross-Platform**: Works on Linux, macOS, Windows, and WASM
-
----
-
-## 📦 Installation
-
-### Using npm
+## Installation
 
 ```bash
-npm install @ruv.io/daa-prime-cli
+pnpm install @ruv.io/daa-prime-cli
 ```
 
-### Using yarn
+## Usage
 
-```bash
-yarn add @ruv.io/daa-prime-cli
-```
-
-### Using pnpm
-
-```bash
-pnpm add @ruv.io/daa-prime-cli
-```
-
-### Platform-Specific Binaries
-
-The package automatically downloads the correct binary for your platform:
-
-- **Linux x64**: `@ruv.io/daa-prime-cli-linux-x64-gnu`
-- **Linux ARM64**: `@ruv.io/daa-prime-cli-linux-arm64-gnu`
-- **macOS x64**: `@ruv.io/daa-prime-cli-darwin-x64`
-- **macOS ARM64**: `@ruv.io/daa-prime-cli-darwin-arm64`
-- **Windows x64**: `@ruv.io/daa-prime-cli-win32-x64-msvc`
-- **WebAssembly**: `@ruv.io/daa-prime-cli-wasm32` (fallback)
-
----
-
-## 🚀 Quick Start
-
-### Basic Usage
+### Basic Example
 
 ```typescript
-import { DaaPrimeCli } from '@ruv.io/daa-prime-cli'
+import { CliRunner } from '@ruv.io/daa-prime-cli'
 
-// Create an instance
-const client = new DaaPrimeCli({
-  // Configuration options
+// Create a CLI runner instance
+const cli = new CliRunner()
+
+// Parse a command
+const command = cli.parseCommand('help')
+
+// Execute the command
+const result = cli.executeCommand(command)
+console.log(result.output)
+```
+
+### Raw Command Execution
+
+```typescript
+import { CliRunner } from '@ruv.io/daa-prime-cli'
+
+const cli = new CliRunner()
+
+// Execute raw command line directly
+const result = cli.executeRaw('peer add --host=localhost --port=8080 node1')
+console.log(result.success) // true
+console.log(result.output)
+```
+
+### Configuration
+
+```typescript
+import { CliRunner, CliConfig } from '@ruv.io/daa-prime-cli'
+
+const config: CliConfig = {
+  prompt: 'my-cli> ',
+  history_size: 500,
+  color_output: true,
+  debug_mode: false,
+  timeout_ms: 60000,
+}
+
+const cli = new CliRunner(config)
+```
+
+### Command History
+
+```typescript
+import { CliRunner } from '@ruv.io/daa-prime-cli'
+
+const cli = new CliRunner()
+
+cli.executeRaw('help')
+cli.executeRaw('version')
+cli.executeRaw('status')
+
+const history = cli.getHistory()
+console.log(history) // ['help', 'version', 'status']
+
+cli.clearHistory()
+```
+
+### REPL Session Management
+
+```typescript
+import { CliRunner } from '@ruv.io/daa-prime-cli'
+
+const cli = new CliRunner()
+
+// Get session information
+const state = cli.getSessionState()
+console.log(state.session_id)
+console.log(state.command_count)
+console.log(state.last_command)
+```
+
+### Configuration Validation
+
+```typescript
+import { validateCliConfig, CliConfig } from '@ruv.io/daa-prime-cli'
+
+const config: CliConfig = {
+  timeout_ms: 5000,
+  history_size: 1000,
+}
+
+const result = validateCliConfig(config)
+if (result.valid) {
+  console.log('Configuration is valid')
+} else {
+  console.log('Errors:', result.errors)
+  console.log('Warnings:', result.warnings)
+}
+```
+
+### Building Commands Programmatically
+
+```typescript
+import { buildCommand } from '@ruv.io/daa-prime-cli'
+
+// Build a command from components
+const command = buildCommand('train', ['model1', 'model2'], {
+  iterations: '100',
+  learning_rate: '0.001',
 })
 
-// Use the client
-const result = await client.process(data)
-console.log(result)
+console.log(command.name) // 'train'
+console.log(command.args) // ['model1', 'model2']
+console.log(command.options) // { iterations: '100', learning_rate: '0.001' }
 ```
 
-### Async/Await Pattern
+## API Reference
 
-```typescript
-import { DaaPrimeCli } from '@ruv.io/daa-prime-cli'
-
-async function main() {
-  const client = new DaaPrimeCli()
-  
-  try {
-    const result = await client.execute()
-    console.log('Success:', result)
-  } catch (error) {
-    console.error('Error:', error)
-  }
-}
-
-main()
-```
-
-### With Configuration
-
-```typescript
-import { DaaPrimeCli, Config } from '@ruv.io/daa-prime-cli'
-
-const config: Config = {
-  // Detailed configuration
-  timeout: 5000,
-  retries: 3,
-  logLevel: 'info'
-}
-
-const client = new DaaPrimeCli(config)
-```
-
-
-
-
-
-
-
----
-
-## 📖 Usage Guide
-
-### Import the Package
-
-First, import the package in your TypeScript/JavaScript file:
-
-```typescript
-// ES Modules
-import { DaaPrimeCli, Config } from '@ruv.io/daa-prime-cli'
-
-// CommonJS
-const { DaaPrimeCli } = require('@ruv.io/daa-prime-cli')
-```
-
-### Create an Instance
-
-Create a new instance with optional configuration:
-
-```typescript
-const client = new DaaPrimeCli({
-  // Configuration options
-  timeout: 5000,
-  retries: 3,
-  logLevel: 'info'
-})
-```
-
-### Process Data
-
-Use the client to process data:
-
-```typescript
-// Synchronous operation
-const result = client.processSync(data)
-
-// Asynchronous operation
-const result = await client.process(data)
-
-// Stream processing
-const stream = client.createStream()
-stream.on('data', (chunk) => {
-  console.log('Received:', chunk)
-})
-stream.write(data)
-```
-
-### Error Handling
-
-Handle errors gracefully:
-
-```typescript
-try {
-  const result = await client.process(data)
-  console.log('Success:', result)
-} catch (error) {
-  if (error instanceof DaaPrimeCliError) {
-    console.error('Client error:', error.message)
-    console.error('Error code:', error.code)
-  } else {
-    console.error('Unexpected error:', error)
-  }
-}
-```
-
-### Resource Cleanup
-
-Always clean up resources when done:
-
-```typescript
-// Manual cleanup
-await client.close()
-
-// Or use try-finally
-try {
-  const result = await client.process(data)
-} finally {
-  await client.close()
-}
-```
-
----
-
-## 📚 API Reference
-
-### Main Class: `DaaPrimeCli`
+### CliRunner Class
 
 #### Constructor
 
 ```typescript
-constructor(config?: Config)
+constructor(config?: CliConfig)
 ```
 
-Creates a new instance of `DaaPrimeCli`.
-
-**Parameters:**
-- `config` (optional): Configuration object
-
-**Returns:**
-- Instance of `DaaPrimeCli`
-
-**Example:**
-```typescript
-const client = new DaaPrimeCli({
-  timeout: 5000
-})
-```
+Create a new CLI runner instance with optional configuration.
 
 #### Methods
 
-##### `process(data: Buffer): Promise<Buffer>`
+- `getConfig(): CliConfig` - Get current CLI configuration
+- `parseCommand(commandLine: string): Command` - Parse a command line string
+- `executeCommand(command: Command): CommandResult` - Execute a parsed command
+- `executeRaw(commandLine: string): CommandResult` - Execute a raw command line
+- `getHistory(): string[]` - Get command history
+- `clearHistory(): boolean` - Clear command history
+- `getSessionState(): ReplSessionState` - Get current session state
+- `listCommands(): string[]` - List available commands
+- `validateConfig(config: CliConfig): ConfigValidationResult` - Validate configuration
 
-Process input data asynchronously.
+### Standalone Functions
 
-**Parameters:**
-- `data`: Input buffer to process
+- `parseAndValidateCommand(commandLine: string): Command` - Parse and validate a command
+- `buildCommand(name: string, args?: string[], options?: Record<string, string>): Command` - Build a command
+- `executeSimpleCommand(commandName: string): CommandResult` - Execute a simple command
+- `validateCliConfig(config: CliConfig): ConfigValidationResult` - Validate CLI configuration
+- `getDefaultConfig(): CliConfig` - Get default configuration
+- `generateSessionId(): string` - Generate a unique session ID
 
-**Returns:**
-- Promise resolving to processed buffer
+## Interfaces
 
-**Example:**
-```typescript
-const input = Buffer.from('Hello, World!')
-const output = await client.process(input)
-```
-
-##### `processSync(data: Buffer): Buffer`
-
-Process input data synchronously.
-
-**Parameters:**
-- `data`: Input buffer to process
-
-**Returns:**
-- Processed buffer
-
-**Example:**
-```typescript
-const input = Buffer.from('Hello, World!')
-const output = client.processSync(input)
-```
-
-##### `close(): Promise<void>`
-
-Close the client and release resources.
-
-**Returns:**
-- Promise that resolves when cleanup is complete
-
-**Example:**
-```typescript
-await client.close()
-```
-
-### Configuration Interface
+### CliConfig
 
 ```typescript
-interface Config {
-  timeout?: number        // Operation timeout in ms (default: 5000)
-  retries?: number        // Number of retries (default: 3)
-  logLevel?: LogLevel    // Logging level (default: 'info')
-  maxConcurrency?: number // Max concurrent operations (default: 10)
+interface CliConfig {
+  prompt?: string // Command prompt (default: 'daa-prime> ')
+  history_size?: number // Max command history size (default: 1000)
+  color_output?: boolean // Enable colored output (default: true)
+  debug_mode?: boolean // Enable debug mode (default: false)
+  timeout_ms?: number // Command timeout in ms (default: 30000)
 }
 ```
 
-### Error Classes
-
-#### `DaaPrimeCliError`
-
-Base error class for all errors thrown by this package.
+### Command
 
 ```typescript
-class DaaPrimeCliError extends Error {
-  code: string
-  details?: any
+interface Command {
+  name: string // Command name
+  args: string[] // Command arguments
+  options: Record<string, string> // Command options
 }
 ```
 
-**Error Codes:**
-- `INVALID_INPUT`: Invalid input data
-- `PROCESSING_FAILED`: Processing operation failed
-- `TIMEOUT`: Operation timed out
-- `RESOURCE_EXHAUSTED`: System resources exhausted
-
----
-
-## 💡 Examples
-
-### Example 1: Basic Processing
+### CommandResult
 
 ```typescript
-import { DaaPrimeCli } from '@ruv.io/daa-prime-cli'
-
-async function basicExample() {
-  const client = new DaaPrimeCli()
-  
-  const input = Buffer.from('Sample data')
-  const output = await client.process(input)
-  
-  console.log('Processed:', output.toString())
-  
-  await client.close()
-}
-
-basicExample()
-```
-
-### Example 2: Batch Processing
-
-```typescript
-import { DaaPrimeCli } from '@ruv.io/daa-prime-cli'
-
-async function batchProcess(items: string[]) {
-  const client = new DaaPrimeCli({
-    maxConcurrency: 5
-  })
-  
-  const results = await Promise.all(
-    items.map(item => 
-      client.process(Buffer.from(item))
-    )
-  )
-  
-  await client.close()
-  return results
-}
-
-const items = ['item1', 'item2', 'item3']
-const results = await batchProcess(items)
-console.log('Results:', results)
-```
-
-### Example 3: Stream Processing
-
-```typescript
-import { DaaPrimeCli } from '@ruv.io/daa-prime-cli'
-import { createReadStream } from 'fs'
-
-async function streamExample() {
-  const client = new DaaPrimeCli()
-  
-  const stream = createReadStream('input.txt')
-  
-  for await (const chunk of stream) {
-    const result = await client.process(chunk)
-    process.stdout.write(result)
-  }
-  
-  await client.close()
-}
-
-streamExample()
-```
-
-### Example 4: Error Handling & Retries
-
-```typescript
-import { DaaPrimeCli, DaaPrimeCliError } from '@ruv.io/daa-prime-cli'
-
-async function processWithRetry(
-  data: Buffer, 
-  maxRetries = 3
-): Promise<Buffer> {
-  const client = new DaaPrimeCli()
-  
-  for (let attempt = 1; attempt <= maxRetries; attempt++) {
-    try {
-      return await client.process(data)
-    } catch (error) {
-      if (error instanceof DaaPrimeCliError) {
-        console.error(
-          `Attempt ${attempt} failed: ${error.message}`
-        )
-        
-        if (attempt === maxRetries) {
-          throw error
-        }
-        
-        // Exponential backoff
-        await new Promise(r => 
-          setTimeout(r, Math.pow(2, attempt) * 1000)
-        )
-      } else {
-        throw error
-      }
-    } finally {
-      if (attempt === maxRetries) {
-        await client.close()
-      }
-    }
-  }
-  
-  throw new Error('All retries exhausted')
-}
-
-// Usage
-try {
-  const result = await processWithRetry(
-    Buffer.from('data')
-  )
-  console.log('Success:', result)
-} catch (error) {
-  console.error('Failed after retries:', error)
+interface CommandResult {
+  success: boolean // Command execution success
+  output: string // Command output
+  error?: string // Error message if failed
+  execution_time_ms: number // Execution time in milliseconds
 }
 ```
 
-### Example 5: Advanced Configuration
+### ReplSessionState
 
 ```typescript
-import { DaaPrimeCli, Config, LogLevel } from '@ruv.io/daa-prime-cli'
-
-const config: Config = {
-  timeout: 10000,
-  retries: 5,
-  logLevel: 'debug',
-  maxConcurrency: 20,
-  // Advanced options
-  bufferSize: 1024 * 1024, // 1MB
-  enableCaching: true,
-  cacheSize: 100
+interface ReplSessionState {
+  session_id: string // Unique session identifier
+  active: boolean // Is session active
+  command_count: number // Number of commands executed
+  start_time: string // Session start timestamp
+  last_command?: string // Last executed command
 }
-
-const client = new DaaPrimeCli(config)
-
-// Process with advanced features
-const result = await client.process(data, {
-  priority: 'high',
-  cache: true,
-  timeout: 15000
-})
-
-await client.close()
 ```
 
----
+## Available Commands
 
-## ⚡ Performance
+- `help` - Show help message
+- `version` - Show version information
+- `config` - Show or update configuration
+- `peer` - Manage peers
+- `model` - Manage models
+- `train` - Train models
+- `execute` - Execute a script
+- `status` - Show system status
+- `clear` - Clear history
+- `exit` - Exit the CLI
 
-### Benchmarks
+## Testing
 
-Performance comparison against pure JavaScript implementation:
-
-| Operation | JavaScript | Rust (this package) | Speedup |
-|-----------|-----------|---------------------|---------|
-| Small data (1KB) | 0.5ms | 0.05ms | **10x faster** |
-| Medium data (1MB) | 50ms | 5ms | **10x faster** |
-| Large data (100MB) | 5000ms | 200ms | **25x faster** |
-
-### Optimization Tips
-
-1. **Batch Processing**: Process multiple items in parallel
-   ```typescript
-   const results = await Promise.all(
-     items.map(item => client.process(item))
-   )
-   ```
-
-2. **Reuse Instances**: Create once, use many times
-   ```typescript
-   const client = new DaaPrimeCli()
-   // Use client for multiple operations
-   await client.close() // Cleanup when done
-   ```
-
-3. **Buffer Pooling**: Reuse buffers when possible
-   ```typescript
-   const buffer = Buffer.allocUnsafe(1024)
-   // Reuse buffer for multiple operations
-   ```
-
-4. **Streaming**: Use streams for large datasets
-   ```typescript
-   const stream = client.createStream()
-   // Process data in chunks
-   ```
-
-### Memory Usage
-
-Typical memory usage patterns:
-
-- **Base overhead**: ~5MB (includes Rust runtime)
-- **Per-instance**: ~500KB
-- **Processing overhead**: ~2x input size (temporary buffers)
-
----
-
-## 🌍 Platform Support
-
-### Supported Platforms
-
-| Platform | Architecture | Status |
-|----------|-------------|--------|
-| **Linux** | x64 (GNU) | ✅ Supported |
-| **Linux** | x64 (musl) | ✅ Supported |
-| **Linux** | ARM64 | ✅ Supported |
-| **macOS** | x64 (Intel) | ✅ Supported |
-| **macOS** | ARM64 (Apple Silicon) | ✅ Supported |
-| **Windows** | x64 | ✅ Supported |
-| **WebAssembly** | wasm32 | ✅ Supported (fallback) |
-
-### Node.js Requirements
-
-- **Minimum**: Node.js 16.x
-- **Recommended**: Node.js 20.x or later
-- **LTS Versions**: All LTS versions supported
-
-### Build from Source
-
-If pre-built binaries are not available for your platform:
+Run tests with:
 
 ```bash
-# Install build dependencies
-npm install -g @napi-rs/cli
-
-# Clone repository
-git clone https://github.com/ruvnet/ruv.io.git
-cd ruv.io/packages/daa-prime-cli
-
-# Build
-npm install
-npm run build
-
-# Test
-npm test
-```
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guide](https://github.com/ruvnet/ruv.io/blob/main/CONTRIBUTING.md) for details.
-
-### Development Setup
-
-```bash
-# Clone repository
-git clone https://github.com/ruvnet/ruv.io.git
-cd ruv.io/packages/daa-prime-cli
-
-# Install dependencies
-pnpm install
-
-# Run tests
 pnpm test
+```
 
-# Run benchmarks
-pnpm bench
+Run tests in watch mode:
 
-# Build
+```bash
+pnpm test:watch
+```
+
+## Build
+
+Build the native bindings:
+
+```bash
 pnpm build
 ```
 
-### Running Tests
+Build debug version:
 
 ```bash
-# Unit tests
-pnpm test
-
-# Integration tests
-pnpm test:integration
-
-# Coverage
-pnpm test:coverage
+pnpm build:debug
 ```
 
-### Reporting Issues
+## Dependencies
 
-Found a bug? Please [open an issue](https://github.com/ruvnet/ruv.io/issues) with:
-- Clear description of the problem
-- Steps to reproduce
-- Expected vs actual behavior
-- Platform and Node.js version
+- `@ruv.io/daa-prime-core` - Core shared structures and protocol definitions
 
----
+## Architecture
 
-## 📄 License
+The package implements a complete CLI framework with:
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/ruvnet/ruv.io/blob/main/LICENSE) file for details.
+1. **Command Parser** - Sophisticated parsing of command lines with support for:
+   - Simple commands
+   - Arguments
+   - Long options (--option=value)
+   - Short flags (-v, -d)
 
----
+2. **Command Executor** - Built-in command execution with:
+   - Execution result tracking
+   - Timing information
+   - Error handling
 
-## 🔗 Links
+3. **Session Management** - REPL session tracking with:
+   - Unique session IDs
+   - Command history
+   - Session state queries
 
-- **NPM Package**: [@ruv.io/daa-prime-cli](https://www.npmjs.com/package/@ruv.io/daa-prime-cli)
-- **GitHub Repository**: [ruvnet/ruv.io](https://github.com/ruvnet/ruv.io)
-- **Rust Crate**: [daa-prime-cli](https://crates.io/crates/daa-prime-cli)
-- **Documentation**: [docs.ruv.io/daa-prime-cli](https://docs.ruv.io/daa-prime-cli)
-- **Issues**: [GitHub Issues](https://github.com/ruvnet/ruv.io/issues)
-- **Discord**: [Join our community](https://discord.gg/ruvio)
+4. **Configuration Management** - Flexible configuration system with:
+   - Validation
+   - Default values
+   - Type safety
 
----
+## License
 
-## 🙏 Acknowledgments
+MIT
 
-- Built with [napi-rs](https://napi.rs/)
-- Powered by [Rust](https://www.rust-lang.org/)
-- Original crate by the [daa-prime-cli](https://crates.io/crates/daa-prime-cli) authors
+## Contributing
 
----
+See [contributing guidelines](../../CONTRIBUTING.md)
 
-## 📊 Stats
+## Support
 
-![NPM](https://nodei.co/npm/@ruv.io/daa-prime-cli.png?downloads=true&downloadRank=true&stars=true)
-
----
-
-<div align="center">
-
-**Made with ❤️ by [rUv](https://github.com/ruvnet)**
-
-[⬆ back to top](#-ruviocratename)
-
-</div>
+For issues and questions, visit the [GitHub repository](https://github.com/ruvnet/ruv.io)

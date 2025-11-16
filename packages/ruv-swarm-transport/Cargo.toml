@@ -1,0 +1,23 @@
+[package]
+name = "ruv_swarm_transport"
+version = "1.0.0"
+edition = "2021"
+authors = ["ruv.io team"]
+license = "MIT"
+repository = "https://github.com/ruvio/ruv.io"
+description = "Transport layer for RUV Swarm communication - Message passing, protocols, serialization, connection management with napi-rs bindings"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = "2.16"
+napi-derive = "2.16"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["serde", "v4"] }
+chrono = { version = "0.4", features = ["serde"] }
+tokio = { version = "1", features = ["full"] }
+
+[build-dependencies]
+napi-build = "2.1"

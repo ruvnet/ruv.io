@@ -1,0 +1,16 @@
+node_modules/
+dist/
+target/
+*.node
+*.d.ts
+index.js
+index.d.ts
+.DS_Store
+.env
+.env.local
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+*.iml

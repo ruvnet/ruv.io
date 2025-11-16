@@ -1,0 +1,24 @@
+[package]
+name = "daa_prime_dht"
+version = "0.1.0"
+edition = "2021"
+authors = ["ruv.io team"]
+license = "MIT"
+repository = "https://github.com/ruvio/ruv.io"
+description = "Distributed Hash Table for DAA Prime with Kademlia-style routing and replication via napi-rs bindings"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+napi = "2.16"
+napi-derive = "2.16"
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+uuid = { version = "1.0", features = ["v4", "serde"] }
+chrono = { version = "0.4", features = ["serde"] }
+sha2 = "0.10"
+hex = "0.4"
+
+[build-dependencies]
+napi-build = "2.1"

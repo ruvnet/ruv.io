@@ -1,0 +1,86 @@
+{
+  "name": "@ruv.io/aimds-analysis",
+  "version": "0.1.0",
+  "description": "Analysis functionality for AIMDS (AI-powered Intrusion Detection and Monitoring System) - High-performance Node.js native addon",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublish -t npm",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:coverage": "vitest --coverage",
+    "version": "napi version",
+    "clean": "rimraf dist *.node *.d.ts index.js index.d.ts",
+    "lint": "eslint src --ext .ts",
+    "format": "prettier --write 'src/**/*.ts' && cargo fmt"
+  },
+  "napi": {
+    "name": "aimds_analysis",
+    "triples": {
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-apple-darwin",
+        "x86_64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "aarch64-pc-windows-msvc"
+      ]
+    }
+  },
+  "dependencies": {
+    "@ruv.io/aimds-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.50.0",
+    "prettier": "^3.0.0",
+    "rimraf": "^5.0.0",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "aimds",
+    "aimds-analysis",
+    "analysis",
+    "rust",
+    "napi",
+    "native",
+    "high-performance",
+    "ai",
+    "manipulation",
+    "defense",
+    "system",
+    "anomaly",
+    "detection",
+    "threat",
+    "assessment"
+  ],
+  "author": "rUv <support@ruv.io>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvnet/ruv.io.git",
+    "directory": "packages/aimds-analysis"
+  },
+  "homepage": "https://github.com/ruvnet/ruv.io/tree/main/packages/aimds-analysis",
+  "bugs": {
+    "url": "https://github.com/ruvnet/ruv.io/issues"
+  }
+}

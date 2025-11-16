@@ -1,0 +1,71 @@
+{
+  "name": "@ruv.io/nt-streaming",
+  "version": "1.0.0",
+  "description": "Real-time market data streaming for Neural Trader - NAPI bindings with WebSocket support",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.node",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "prepublishOnly": "napi prepublish -t npm",
+    "version": "napi version",
+    "clean": "rimraf dist *.node *.d.ts",
+    "lint": "eslint src --ext .ts,.rs",
+    "format": "prettier --write 'src/**/*.ts' && cargo fmt"
+  },
+  "napi": {
+    "name": "nt_streaming",
+    "triples": {
+      "additional": [
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-apple-darwin",
+        "x86_64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "aarch64-pc-windows-msvc"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "@types/node": "^20.10.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.1",
+    "@typescript-eslint/parser": "^6.18.1",
+    "eslint": "^8.56.0",
+    "prettier": "^3.1.1",
+    "rimraf": "^5.0.5",
+    "typescript": "^5.3.3",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "keywords": [
+    "nt-streaming",
+    "streaming",
+    "real-time",
+    "market-data",
+    "trading",
+    "rust",
+    "napi",
+    "websocket",
+    "native"
+  ],
+  "author": "rUv <support@ruv.io>",
+  "license": "MIT OR Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvnet/ruv.io.git",
+    "directory": "packages/nt-streaming"
+  },
+  "homepage": "https://github.com/ruvnet/ruv.io/tree/main/packages/nt-streaming"
+}

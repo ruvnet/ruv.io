@@ -1,0 +1,19 @@
+# Source files
+src/
+__test__/
+.eslintrc.json
+.prettierrc.json
+rustfmt.toml
+tsconfig.json
+vitest.config.ts
+Cargo.lock
+build.rs
+
+# Development
+*.log
+.DS_Store
+.vscode
+.idea
+*.swp
+.git
+.github

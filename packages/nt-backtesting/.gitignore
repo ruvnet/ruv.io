@@ -1,0 +1,8 @@
+node_modules
+*.node
+target
+dist
+*.d.ts
+index.js
+*.lock
+.DS_Store

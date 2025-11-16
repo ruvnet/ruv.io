@@ -1,0 +1,70 @@
+{
+  "name": "@ruv.io/opencv-sdk",
+  "version": "4.8.1",
+  "description": "OpenCV SDK - High-level computer vision APIs, workflow automation, and preset configurations with napi-rs bindings",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "opencv_sdk",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "x86_64-unknown-linux-musl",
+        "aarch64-unknown-linux-gnu",
+        "aarch64-unknown-linux-musl",
+        "aarch64-apple-darwin",
+        "x86_64-apple-darwin",
+        "x86_64-pc-windows-msvc",
+        "aarch64-pc-windows-msvc"
+      ]
+    }
+  },
+  "keywords": [
+    "opencv",
+    "computer-vision",
+    "image-processing",
+    "workflow",
+    "sdk",
+    "pipeline",
+    "batch-processing",
+    "presets",
+    "napi",
+    "rust"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.18.0",
+    "@ruv.io/opencv-core": "workspace:*",
+    "vitest": "^1.0.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@ruv.io/opencv-core": "workspace:*"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ruvnet/ruv.io.git",
+    "directory": "packages/opencv-sdk"
+  },
+  "homepage": "https://github.com/ruvnet/ruv.io/tree/main/packages/opencv-sdk"
+}

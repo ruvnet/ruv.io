@@ -29,23 +29,32 @@
 
 ## 🎯 Overview
 
-`@ruv.io/opencv-sdk` is a high-performance Node.js native addon that provides TypeScript bindings for the [`opencv-sdk`](https://crates.io/crates/opencv-sdk) Rust crate. Built with [napi-rs](https://napi.rs/), it delivers native performance with a modern JavaScript API.
+`@ruv.io/opencv-sdk` is a high-performance Node.js native addon providing high-level computer vision APIs, workflow automation, and preset configurations. Built with [napi-rs](https://napi.rs/) and Rust, it delivers native performance with a modern TypeScript API for image processing pipelines, batch operations, and computer vision workflows.
 
 **Key Information:**
 - **Version**: 4.8.1
-- **Downloads**: 796+
-- **Categories**: Computer Vision
+- **Categories**: Computer Vision, Image Processing, Workflow Automation
 - **License**: MIT
-- **Rust Crate**: [opencv-sdk](https://crates.io/crates/opencv-sdk)
+- **Depends On**: @ruv.io/opencv-core
+
+**Core Features:**
+- Image processing pipelines with workflow management
+- Pre-configured computer vision presets (edge detection, face detection, object tracking, thresholding)
+- Batch processing operations with progress tracking
+- Multi-stage workflow execution
+- Cache management and statistics
 
 ---
 
 ## ✨ Features
 
-- 🚀 **High Performance**: Native Rust implementation with zero-copy operations
-- 📦 **Easy to Use**: Simple, intuitive TypeScript API
-- 🔒 **Type Safe**: Full TypeScript definitions included
-- ⚡ **Async Ready**: Built on modern async/await patterns
+- 🚀 **High Performance**: Native Rust implementation with efficient workflow management
+- 📊 **Workflow Automation**: Multi-stage pipeline execution with error handling and retry logic
+- 🎨 **Preset Configurations**: Ready-to-use CV presets (edge detection, face detection, object tracking, thresholding)
+- 📦 **Batch Processing**: Process multiple images with progress tracking and completion status
+- 🔒 **Type Safe**: Full TypeScript definitions with compile-time safety
+- ⚡ **Pipeline Management**: Create, validate, and execute image processing pipelines
+- 💾 **Cache Management**: Built-in caching system with statistics and monitoring
 - 🌐 **Cross-Platform**: Works on Linux, macOS, Windows, and WASM
 
 ---
@@ -85,53 +94,101 @@ The package automatically downloads the correct binary for your platform:
 
 ## 🚀 Quick Start
 
-### Basic Usage
+### Basic Pipeline Usage
 
 ```typescript
-import { OpencvSdk } from '@ruv.io/opencv-sdk'
+import { OpenCvSdk } from '@ruv.io/opencv-sdk'
 
-// Create an instance
-const client = new OpencvSdk({
-  // Configuration options
-})
+// Create SDK instance
+const sdk = new OpenCvSdk()
 
-// Use the client
-const result = await client.process(data)
-console.log(result)
-```
-
-### Async/Await Pattern
-
-```typescript
-import { OpencvSdk } from '@ruv.io/opencv-sdk'
-
-async function main() {
-  const client = new OpencvSdk()
-  
-  try {
-    const result = await client.execute()
-    console.log('Success:', result)
-  } catch (error) {
-    console.error('Error:', error)
-  }
+// Create and execute a pipeline
+const pipeline = {
+  name: 'edge_detection',
+  steps: ['grayscale', 'blur', 'canny_edge'],
+  cache_enabled: true,
+  timeout_ms: 5000
 }
 
-main()
+const result = sdk.createPipeline(pipeline)
+console.log('Pipeline created:', result.pipeline_id)
+
+// Process an image with the pipeline
+const processResult = sdk.processImage('image_001', 'edge_detection', 640, 480)
+console.log('Processed:', processResult)
 ```
 
-### With Configuration
+### Preset Usage
 
 ```typescript
-import { OpencvSdk, Config } from '@ruv.io/opencv-sdk'
+import {
+  OpenCvSdk,
+  createEdgeDetectionPreset,
+  createFaceDetectionPreset
+} from '@ruv.io/opencv-sdk'
 
-const config: Config = {
-  // Detailed configuration
-  timeout: 5000,
-  retries: 3,
-  logLevel: 'info'
+const sdk = new OpenCvSdk()
+
+// Use built-in presets
+const edgeDetectionResult = sdk.applyEdgeDetection('my_image.jpg', 'canny')
+const blurResult = sdk.applyBlurFilter('my_image.jpg', 5)
+const colorResult = sdk.applyColorConversion('my_image.jpg', 'HSV')
+
+console.log('Edge detection:', edgeDetectionResult)
+```
+
+### Batch Processing
+
+```typescript
+import { OpenCvSdk } from '@ruv.io/opencv-sdk'
+
+const sdk = new OpenCvSdk()
+
+// Create a batch job
+const imageIds = ['img1', 'img2', 'img3', 'img4', 'img5']
+const jobResult = sdk.createBatchJob(imageIds, 'edge_detection')
+
+// Monitor progress
+const status = sdk.getBatchJobStatus(jobResult.job_id)
+console.log('Batch job:', status)
+
+// Process batch
+const progress = sdk.processBatch(jobResult.job_id)
+console.log('Progress:', progress.progress)
+
+// Complete batch
+const completion = sdk.completeBatch(jobResult.job_id)
+console.log('Completed:', completion)
+```
+
+### Workflow Automation
+
+```typescript
+import { OpenCvSdk } from '@ruv.io/opencv-sdk'
+
+const sdk = new OpenCvSdk()
+
+// Define a multi-stage workflow
+const workflow = {
+  workflow_id: 'analysis_wf',
+  name: 'Image Analysis Workflow',
+  stages: ['capture', 'preprocess', 'detect', 'track', 'classify'],
+  error_handling: 'continue',
+  retry_count: 3
 }
 
-const client = new OpencvSdk(config)
+// Start workflow
+const result = sdk.startWorkflow(workflow)
+
+// Execute stages
+for (let i = 0; i < workflow.stages.length; i++) {
+  const stageResult = sdk.executeWorkflowStage(workflow.workflow_id, i)
+  console.log(`Stage ${i} completed:`, stageResult)
+}
+
+// Get final results
+const finalResult = sdk.getWorkflowResult(workflow.workflow_id)
+console.log('Workflow completed:', finalResult)
 ```
 
 

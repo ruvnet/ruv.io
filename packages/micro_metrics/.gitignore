@@ -1,0 +1,12 @@
+node_modules/
+dist/
+target/
+*.node
+*.so
+*.dylib
+.env
+.DS_Store
+coverage/
+*.log
+npm-debug.log*
+.eslintcache

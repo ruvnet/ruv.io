@@ -1,0 +1,13 @@
+src
+__test__
+.eslintrc.json
+.prettierrc.json
+tsconfig.json
+vitest.config.ts
+build.rs
+Cargo.toml
+Cargo.lock
+rustfmt.toml
+target
+node_modules
+.DS_Store

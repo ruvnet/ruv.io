@@ -1,0 +1,49 @@
+{
+  "name": "@ruv.io/daa-prime-coordinator",
+  "version": "1.0.0",
+  "description": "DAA Prime Coordinator - Agent coordination and orchestration for DAA Prime distributed ML with napi-rs bindings",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "files": [
+    "index.d.ts",
+    "index.js",
+    "*.node"
+  ],
+  "scripts": {
+    "build": "napi build --platform --release",
+    "build:debug": "napi build --platform",
+    "prepublishOnly": "napi prepublishOnly --skip-gh-release",
+    "test": "vitest",
+    "universal": "napi universal"
+  },
+  "napi": {
+    "name": "daa_prime_coordinator",
+    "triples": {
+      "defaults": true,
+      "additional": [
+        "x86_64-unknown-linux-gnu",
+        "aarch64-unknown-linux-gnu"
+      ]
+    }
+  },
+  "keywords": [
+    "daa",
+    "prime",
+    "coordinator",
+    "agent",
+    "orchestration",
+    "consensus",
+    "distributed",
+    "napi",
+    "rust"
+  ],
+  "author": "ruv.io team",
+  "license": "MIT",
+  "devDependencies": {
+    "@napi-rs/cli": "^2.16.0",
+    "vitest": "^1.0.0"
+  },
+  "engines": {
+    "node": ">= 14"
+  }
+}
